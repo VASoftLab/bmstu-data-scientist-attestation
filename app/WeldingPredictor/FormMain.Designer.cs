@@ -37,6 +37,13 @@
             this.labelPathToData = new System.Windows.Forms.Label();
             this.textBoxPathToData = new System.Windows.Forms.TextBox();
             this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.iWDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.iFDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vWDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fPDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.depthDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.widthDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.groupBoxIn = new System.Windows.Forms.GroupBox();
             this.labelFP = new System.Windows.Forms.Label();
             this.labelVW = new System.Windows.Forms.Label();
@@ -52,23 +59,18 @@
             this.textBoxWidth = new System.Windows.Forms.TextBox();
             this.textBoxDepth = new System.Windows.Forms.TextBox();
             this.groupBoxPrediction = new System.Windows.Forms.GroupBox();
+            this.labelDeltaWidth = new System.Windows.Forms.Label();
+            this.labelDeltaDepth = new System.Windows.Forms.Label();
             this.labelWidthPrediction = new System.Windows.Forms.Label();
             this.labelDepthPrediction = new System.Windows.Forms.Label();
             this.textBoxWidthPrediction = new System.Windows.Forms.TextBox();
             this.textBoxDepthPrediction = new System.Windows.Forms.TextBox();
             this.buttonPrediction = new System.Windows.Forms.Button();
-            this.iWDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.iFDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.vWDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fPDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.depthDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.widthDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).BeginInit();
             this.groupBoxIn.SuspendLayout();
             this.groupBoxOut.SuspendLayout();
             this.groupBoxPrediction.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonLoadModel
@@ -100,16 +102,16 @@
             this.textBoxPathToModel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxPathToModel.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.textBoxPathToModel.Location = new System.Drawing.Point(14, 34);
+            this.textBoxPathToModel.Location = new System.Drawing.Point(13, 34);
             this.textBoxPathToModel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBoxPathToModel.Name = "textBoxPathToModel";
-            this.textBoxPathToModel.Size = new System.Drawing.Size(797, 26);
+            this.textBoxPathToModel.Size = new System.Drawing.Size(798, 26);
             this.textBoxPathToModel.TabIndex = 1;
             // 
             // labelPathToModel
             // 
             this.labelPathToModel.AutoSize = true;
-            this.labelPathToModel.Location = new System.Drawing.Point(14, 9);
+            this.labelPathToModel.Location = new System.Drawing.Point(13, 9);
             this.labelPathToModel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelPathToModel.Name = "labelPathToModel";
             this.labelPathToModel.Size = new System.Drawing.Size(175, 20);
@@ -131,7 +133,7 @@
             // labelPathToData
             // 
             this.labelPathToData.AutoSize = true;
-            this.labelPathToData.Location = new System.Drawing.Point(14, 65);
+            this.labelPathToData.Location = new System.Drawing.Point(13, 65);
             this.labelPathToData.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelPathToData.Name = "labelPathToData";
             this.labelPathToData.Size = new System.Drawing.Size(172, 20);
@@ -143,10 +145,10 @@
             this.textBoxPathToData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxPathToData.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.textBoxPathToData.Location = new System.Drawing.Point(14, 90);
+            this.textBoxPathToData.Location = new System.Drawing.Point(13, 90);
             this.textBoxPathToData.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBoxPathToData.Name = "textBoxPathToData";
-            this.textBoxPathToData.Size = new System.Drawing.Size(797, 26);
+            this.textBoxPathToData.Size = new System.Drawing.Size(798, 26);
             this.textBoxPathToData.TabIndex = 4;
             // 
             // dataGridView
@@ -159,7 +161,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView.AutoGenerateColumns = false;
-            this.dataGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridView.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView.ColumnHeadersHeight = 32;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -171,11 +173,11 @@
             this.widthDataGridViewTextBoxColumn});
             this.dataGridView.DataSource = this.bindingSource;
             this.dataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dataGridView.EnableHeadersVisualStyles = false;
             this.dataGridView.Location = new System.Drawing.Point(14, 127);
             this.dataGridView.MultiSelect = false;
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.ReadOnly = true;
+            this.dataGridView.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.dataGridView.RowHeadersVisible = false;
             this.dataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dataGridView.RowTemplate.Height = 24;
@@ -187,6 +189,69 @@
             this.dataGridView.Size = new System.Drawing.Size(544, 441);
             this.dataGridView.TabIndex = 6;
             this.dataGridView.SelectionChanged += new System.EventHandler(this.dataGridView_SelectionChanged);
+            // 
+            // iWDataGridViewTextBoxColumn
+            // 
+            this.iWDataGridViewTextBoxColumn.DataPropertyName = "IW";
+            this.iWDataGridViewTextBoxColumn.HeaderText = "IW";
+            this.iWDataGridViewTextBoxColumn.Name = "iWDataGridViewTextBoxColumn";
+            this.iWDataGridViewTextBoxColumn.ReadOnly = true;
+            this.iWDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.iWDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.iWDataGridViewTextBoxColumn.Width = 75;
+            // 
+            // iFDataGridViewTextBoxColumn
+            // 
+            this.iFDataGridViewTextBoxColumn.DataPropertyName = "IF";
+            this.iFDataGridViewTextBoxColumn.HeaderText = "IF";
+            this.iFDataGridViewTextBoxColumn.Name = "iFDataGridViewTextBoxColumn";
+            this.iFDataGridViewTextBoxColumn.ReadOnly = true;
+            this.iFDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.iFDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.iFDataGridViewTextBoxColumn.Width = 75;
+            // 
+            // vWDataGridViewTextBoxColumn
+            // 
+            this.vWDataGridViewTextBoxColumn.DataPropertyName = "VW";
+            this.vWDataGridViewTextBoxColumn.HeaderText = "VW";
+            this.vWDataGridViewTextBoxColumn.Name = "vWDataGridViewTextBoxColumn";
+            this.vWDataGridViewTextBoxColumn.ReadOnly = true;
+            this.vWDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.vWDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.vWDataGridViewTextBoxColumn.Width = 75;
+            // 
+            // fPDataGridViewTextBoxColumn
+            // 
+            this.fPDataGridViewTextBoxColumn.DataPropertyName = "FP";
+            this.fPDataGridViewTextBoxColumn.HeaderText = "FP";
+            this.fPDataGridViewTextBoxColumn.Name = "fPDataGridViewTextBoxColumn";
+            this.fPDataGridViewTextBoxColumn.ReadOnly = true;
+            this.fPDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.fPDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.fPDataGridViewTextBoxColumn.Width = 75;
+            // 
+            // depthDataGridViewTextBoxColumn
+            // 
+            this.depthDataGridViewTextBoxColumn.DataPropertyName = "Depth";
+            this.depthDataGridViewTextBoxColumn.HeaderText = "Depth";
+            this.depthDataGridViewTextBoxColumn.Name = "depthDataGridViewTextBoxColumn";
+            this.depthDataGridViewTextBoxColumn.ReadOnly = true;
+            this.depthDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.depthDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // widthDataGridViewTextBoxColumn
+            // 
+            this.widthDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.widthDataGridViewTextBoxColumn.DataPropertyName = "Width";
+            this.widthDataGridViewTextBoxColumn.HeaderText = "Width";
+            this.widthDataGridViewTextBoxColumn.Name = "widthDataGridViewTextBoxColumn";
+            this.widthDataGridViewTextBoxColumn.ReadOnly = true;
+            this.widthDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.widthDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // bindingSource
+            // 
+            this.bindingSource.DataSource = typeof(WeldingPredictor.WeldingDataItem);
             // 
             // groupBoxIn
             // 
@@ -250,27 +315,27 @@
             // 
             this.textBoxFP.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxFP.ForeColor = System.Drawing.Color.DimGray;
-            this.textBoxFP.Location = new System.Drawing.Point(193, 135);
+            this.textBoxFP.Location = new System.Drawing.Point(192, 135);
             this.textBoxFP.Name = "textBoxFP";
-            this.textBoxFP.Size = new System.Drawing.Size(100, 26);
+            this.textBoxFP.Size = new System.Drawing.Size(106, 26);
             this.textBoxFP.TabIndex = 3;
             // 
             // textBoxVW
             // 
             this.textBoxVW.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxVW.ForeColor = System.Drawing.Color.DimGray;
-            this.textBoxVW.Location = new System.Drawing.Point(193, 103);
+            this.textBoxVW.Location = new System.Drawing.Point(192, 103);
             this.textBoxVW.Name = "textBoxVW";
-            this.textBoxVW.Size = new System.Drawing.Size(100, 26);
+            this.textBoxVW.Size = new System.Drawing.Size(106, 26);
             this.textBoxVW.TabIndex = 2;
             // 
             // textBoxIF
             // 
             this.textBoxIF.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxIF.ForeColor = System.Drawing.Color.DimGray;
-            this.textBoxIF.Location = new System.Drawing.Point(193, 71);
+            this.textBoxIF.Location = new System.Drawing.Point(192, 71);
             this.textBoxIF.Name = "textBoxIF";
-            this.textBoxIF.Size = new System.Drawing.Size(100, 26);
+            this.textBoxIF.Size = new System.Drawing.Size(106, 26);
             this.textBoxIF.TabIndex = 1;
             // 
             // textBoxIW
@@ -279,7 +344,7 @@
             this.textBoxIW.ForeColor = System.Drawing.Color.DimGray;
             this.textBoxIW.Location = new System.Drawing.Point(193, 39);
             this.textBoxIW.Name = "textBoxIW";
-            this.textBoxIW.Size = new System.Drawing.Size(100, 26);
+            this.textBoxIW.Size = new System.Drawing.Size(105, 26);
             this.textBoxIW.TabIndex = 0;
             // 
             // groupBoxOut
@@ -320,23 +385,25 @@
             // 
             this.textBoxWidth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxWidth.ForeColor = System.Drawing.Color.DarkCyan;
-            this.textBoxWidth.Location = new System.Drawing.Point(193, 65);
+            this.textBoxWidth.Location = new System.Drawing.Point(191, 65);
             this.textBoxWidth.Name = "textBoxWidth";
-            this.textBoxWidth.Size = new System.Drawing.Size(100, 26);
+            this.textBoxWidth.Size = new System.Drawing.Size(107, 26);
             this.textBoxWidth.TabIndex = 1;
             // 
             // textBoxDepth
             // 
             this.textBoxDepth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxDepth.ForeColor = System.Drawing.Color.DarkCyan;
-            this.textBoxDepth.Location = new System.Drawing.Point(193, 33);
+            this.textBoxDepth.Location = new System.Drawing.Point(191, 33);
             this.textBoxDepth.Name = "textBoxDepth";
-            this.textBoxDepth.Size = new System.Drawing.Size(100, 26);
+            this.textBoxDepth.Size = new System.Drawing.Size(107, 26);
             this.textBoxDepth.TabIndex = 0;
             // 
             // groupBoxPrediction
             // 
             this.groupBoxPrediction.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxPrediction.Controls.Add(this.labelDeltaWidth);
+            this.groupBoxPrediction.Controls.Add(this.labelDeltaDepth);
             this.groupBoxPrediction.Controls.Add(this.labelWidthPrediction);
             this.groupBoxPrediction.Controls.Add(this.labelDepthPrediction);
             this.groupBoxPrediction.Controls.Add(this.textBoxWidthPrediction);
@@ -347,6 +414,34 @@
             this.groupBoxPrediction.TabIndex = 9;
             this.groupBoxPrediction.TabStop = false;
             this.groupBoxPrediction.Text = "Прогноз";
+            // 
+            // labelDeltaWidth
+            // 
+            this.labelDeltaWidth.BackColor = System.Drawing.Color.Transparent;
+            this.labelDeltaWidth.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.labelDeltaWidth.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelDeltaWidth.ForeColor = System.Drawing.Color.DimGray;
+            this.labelDeltaWidth.Location = new System.Drawing.Point(248, 76);
+            this.labelDeltaWidth.Name = "labelDeltaWidth";
+            this.labelDeltaWidth.Size = new System.Drawing.Size(46, 13);
+            this.labelDeltaWidth.TabIndex = 7;
+            this.labelDeltaWidth.Text = "0.00";
+            this.labelDeltaWidth.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.labelDeltaWidth.Visible = false;
+            // 
+            // labelDeltaDepth
+            // 
+            this.labelDeltaDepth.BackColor = System.Drawing.Color.Transparent;
+            this.labelDeltaDepth.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.labelDeltaDepth.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelDeltaDepth.ForeColor = System.Drawing.Color.DimGray;
+            this.labelDeltaDepth.Location = new System.Drawing.Point(248, 44);
+            this.labelDeltaDepth.Name = "labelDeltaDepth";
+            this.labelDeltaDepth.Size = new System.Drawing.Size(46, 13);
+            this.labelDeltaDepth.TabIndex = 6;
+            this.labelDeltaDepth.Text = "0.00";
+            this.labelDeltaDepth.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.labelDeltaDepth.Visible = false;
             // 
             // labelWidthPrediction
             // 
@@ -372,18 +467,18 @@
             // 
             this.textBoxWidthPrediction.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxWidthPrediction.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.textBoxWidthPrediction.Location = new System.Drawing.Point(193, 65);
+            this.textBoxWidthPrediction.Location = new System.Drawing.Point(191, 65);
             this.textBoxWidthPrediction.Name = "textBoxWidthPrediction";
-            this.textBoxWidthPrediction.Size = new System.Drawing.Size(100, 26);
+            this.textBoxWidthPrediction.Size = new System.Drawing.Size(107, 26);
             this.textBoxWidthPrediction.TabIndex = 1;
             // 
             // textBoxDepthPrediction
             // 
             this.textBoxDepthPrediction.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxDepthPrediction.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.textBoxDepthPrediction.Location = new System.Drawing.Point(193, 33);
+            this.textBoxDepthPrediction.Location = new System.Drawing.Point(191, 33);
             this.textBoxDepthPrediction.Name = "textBoxDepthPrediction";
-            this.textBoxDepthPrediction.Size = new System.Drawing.Size(100, 26);
+            this.textBoxDepthPrediction.Size = new System.Drawing.Size(107, 26);
             this.textBoxDepthPrediction.TabIndex = 0;
             // 
             // buttonPrediction
@@ -397,57 +492,6 @@
             this.buttonPrediction.Text = "ПРОГНОЗ";
             this.buttonPrediction.UseVisualStyleBackColor = true;
             this.buttonPrediction.Click += new System.EventHandler(this.buttonPrediction_Click);
-            // 
-            // iWDataGridViewTextBoxColumn
-            // 
-            this.iWDataGridViewTextBoxColumn.DataPropertyName = "IW";
-            this.iWDataGridViewTextBoxColumn.HeaderText = "IW";
-            this.iWDataGridViewTextBoxColumn.Name = "iWDataGridViewTextBoxColumn";
-            this.iWDataGridViewTextBoxColumn.ReadOnly = true;
-            this.iWDataGridViewTextBoxColumn.Width = 75;
-            // 
-            // iFDataGridViewTextBoxColumn
-            // 
-            this.iFDataGridViewTextBoxColumn.DataPropertyName = "IF";
-            this.iFDataGridViewTextBoxColumn.HeaderText = "IF";
-            this.iFDataGridViewTextBoxColumn.Name = "iFDataGridViewTextBoxColumn";
-            this.iFDataGridViewTextBoxColumn.ReadOnly = true;
-            this.iFDataGridViewTextBoxColumn.Width = 75;
-            // 
-            // vWDataGridViewTextBoxColumn
-            // 
-            this.vWDataGridViewTextBoxColumn.DataPropertyName = "VW";
-            this.vWDataGridViewTextBoxColumn.HeaderText = "VW";
-            this.vWDataGridViewTextBoxColumn.Name = "vWDataGridViewTextBoxColumn";
-            this.vWDataGridViewTextBoxColumn.ReadOnly = true;
-            this.vWDataGridViewTextBoxColumn.Width = 75;
-            // 
-            // fPDataGridViewTextBoxColumn
-            // 
-            this.fPDataGridViewTextBoxColumn.DataPropertyName = "FP";
-            this.fPDataGridViewTextBoxColumn.HeaderText = "FP";
-            this.fPDataGridViewTextBoxColumn.Name = "fPDataGridViewTextBoxColumn";
-            this.fPDataGridViewTextBoxColumn.ReadOnly = true;
-            this.fPDataGridViewTextBoxColumn.Width = 75;
-            // 
-            // depthDataGridViewTextBoxColumn
-            // 
-            this.depthDataGridViewTextBoxColumn.DataPropertyName = "Depth";
-            this.depthDataGridViewTextBoxColumn.HeaderText = "Depth";
-            this.depthDataGridViewTextBoxColumn.Name = "depthDataGridViewTextBoxColumn";
-            this.depthDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // widthDataGridViewTextBoxColumn
-            // 
-            this.widthDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.widthDataGridViewTextBoxColumn.DataPropertyName = "Width";
-            this.widthDataGridViewTextBoxColumn.HeaderText = "Width";
-            this.widthDataGridViewTextBoxColumn.Name = "widthDataGridViewTextBoxColumn";
-            this.widthDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // bindingSource
-            // 
-            this.bindingSource.DataSource = typeof(WeldingPredictor.WeldingDataItem);
             // 
             // FormMain
             // 
@@ -475,13 +519,13 @@
             this.Text = "Welding Predictor 1.0";
             this.Load += new System.EventHandler(this.FormMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).EndInit();
             this.groupBoxIn.ResumeLayout(false);
             this.groupBoxIn.PerformLayout();
             this.groupBoxOut.ResumeLayout(false);
             this.groupBoxOut.PerformLayout();
             this.groupBoxPrediction.ResumeLayout(false);
             this.groupBoxPrediction.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -523,6 +567,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn fPDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn depthDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn widthDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Label labelDeltaWidth;
+        private System.Windows.Forms.Label labelDeltaDepth;
     }
 }
 

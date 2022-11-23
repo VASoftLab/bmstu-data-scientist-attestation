@@ -9,6 +9,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using Microsoft.ML;
+using Microsoft.ML.OnnxRuntime;
+using Microsoft.ML.OnnxRuntime.Tensors;
+
 namespace WeldingPredictor
 {
     public partial class FormMain : Form
@@ -127,7 +131,86 @@ namespace WeldingPredictor
 
         private void buttonPrediction_Click(object sender, EventArgs e)
         {
-            ;
+            Cursor.Current = Cursors.WaitCursor;
+            try
+            {
+                // Созднаие сессии для работы с моделью
+                var session = new InferenceSession(appSet.PathToModel);
+                // Получаем информацию о входных и выходных слоях модели
+                var inputMeta = session.InputMetadata;
+                var outputMeta = session.OutputMetadata;
+                // Определяем вектор входных переменных
+                float.TryParse(textBoxIW.Text, out float IW);
+                float.TryParse(textBoxIF.Text, out float IF);
+                float.TryParse(textBoxVW.Text, out float VW);
+                float.TryParse(textBoxFP.Text, out float FP);
+
+                if (IW == 0 && IF == 0 && VW == 0 && FP == 0)
+                {
+                    MessageBox.Show("Проверьте правильность ввода данных!", "Ошибка", buttons: MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Задаем конфигурацию входного тензора
+                var inputTensor = new DenseTensor<float>(new int[] { 1, 4 });
+                inputTensor.SetValue(0, IW);
+                inputTensor.SetValue(1, IF);
+                inputTensor.SetValue(2, VW);
+                inputTensor.SetValue(3, FP);
+                // Создание именнованого тензора для передачи в модель
+                var normalization_input = NamedOnnxValue.CreateFromTensor("normalization_input", inputTensor);
+                var inputs = new List<NamedOnnxValue>() { normalization_input };
+                // Запуск модели
+                using (var outputs = session.Run(inputs))
+                {
+                    foreach (var output in outputs)
+                    {
+                        // Ищем выходной слой dense_2
+                        if (output.Name == "dense_2")
+                        {
+                            // Считываем тензор с данными
+                            DenseTensor<float> denseTensor = output.AsTensor<float>().ToDenseTensor();
+                            // Парсим данные
+                            var values = new float[denseTensor.Length];
+                            denseTensor.Buffer.CopyTo(values);
+                            try
+                            {
+                                // Выводим результат в текстовые поля
+                                textBoxDepthPrediction.Text = values[0].ToString("0.00");
+                                textBoxWidthPrediction.Text = values[1].ToString("0.00");
+
+                                // Расчет относительной погрешности
+                                float.TryParse(textBoxDepth.Text, out float Depth);
+                                float.TryParse(textBoxWidth.Text, out float Width);
+
+                                float.TryParse(textBoxDepthPrediction.Text, out float DepthPrediction);
+                                float.TryParse(textBoxWidthPrediction.Text, out float WidthPrediction);
+
+                                // Расчет относительной ошибки предсказания
+                                float deltaDepth = 100*Math.Abs((DepthPrediction - Depth) / Depth);
+                                float deltaWidth = 100* Math.Abs((WidthPrediction - Width) / Width);
+                                labelDeltaDepth.Visible = true;
+                                labelDeltaWidth.Visible = true;
+                                labelDeltaDepth.Text = $"{deltaDepth.ToString("0.00")}%";
+                                labelDeltaWidth.Text = $"{deltaWidth.ToString("0.00")}%";
+
+                            }
+                            catch (Exception ex)
+                            {
+                                Cursor.Current = Cursors.Default;
+                                MessageBox.Show(ex.Message);
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Cursor.Current = Cursors.Default;
+                MessageBox.Show(ex.Message);
+            }
+            Cursor.Current = Cursors.Default;
         }
 
         private void dataGridView_SelectionChanged(object sender, EventArgs e)
