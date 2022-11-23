@@ -14,11 +14,13 @@ namespace WeldingPredictor
     public partial class FormMain : Form
     {
         private ApplicationSettings appSet;
+        private List<WeldingDataItem> dataSet;
         public FormMain()
         {
             InitializeComponent();
 
             appSet = new ApplicationSettings();
+            dataSet = new List<WeldingDataItem>();
         }
 
         private void FormMain_Load(object sender, EventArgs e)
@@ -48,8 +50,6 @@ namespace WeldingPredictor
                     textBoxPathToModel.Text = openFileDialog.FileName;
                     appSet.PathToModel = textBoxPathToModel.Text;
                     appSet.Save();
-
-                    LoadData();
                 }
             }
         }
@@ -68,18 +68,94 @@ namespace WeldingPredictor
                     textBoxPathToData.Text = openFileDialog.FileName;
                     appSet.PathToData = textBoxPathToData.Text;
                     appSet.Save();
+                    // Загрузка данных
+                    LoadData();
                 }
             }
         }
-
+        /// <summary>
+        /// Загрузка данных из CSV-файла
+        /// </summary>
         private void LoadData()
         {
-            ;
+            dataSet.Clear();
+            string[] data = System.IO.File.ReadAllLines(appSet.PathToData);
+            
+            bool first = true;
+            
+            foreach (string line in data)
+            {
+                if (first)
+                {
+                    first = false;
+                    continue;
+                }
+
+                try
+                {
+                    string[] item = line.Split(',');
+
+                    if (item.Length == 6)
+                    {
+                        float.TryParse(item[0], out float IW);
+                        float.TryParse(item[1], out float IF);
+                        float.TryParse(item[2], out float VW);
+                        float.TryParse(item[3], out float FP);
+                        float.TryParse(item[4], out float Depth);
+                        float.TryParse(item[5], out float Width);
+
+                        dataSet.Add(new WeldingDataItem()
+                        {
+                            IW = IW,
+                            IF = IF,
+                            VW = VW,
+                            FP = FP,
+                            Depth = Depth,
+                            Width = Width
+                        });
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    break;
+                }
+            }
+
+            bindingSource.DataSource = dataSet;
         }
 
         private void buttonPrediction_Click(object sender, EventArgs e)
         {
             ;
+        }
+
+        private void dataGridView_SelectionChanged(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in dataGridView.SelectedRows)
+            {
+                string IW = row.Cells[0].Value.ToString();
+                string IF = row.Cells[1].Value.ToString();
+                string VW = row.Cells[2].Value.ToString();
+                string FP = row.Cells[3].Value.ToString();
+                string Depth = row.Cells[4].Value.ToString();
+                string Width = row.Cells[5].Value.ToString();
+                
+                if (!String.IsNullOrEmpty(IW) &&
+                    !String.IsNullOrEmpty(IF) &&
+                    !String.IsNullOrEmpty(VW) &&
+                    !String.IsNullOrEmpty(FP) &&
+                    !String.IsNullOrEmpty(Depth) &&
+                    !String.IsNullOrEmpty(Width))
+                {
+                    textBoxIW.Text = IW;
+                    textBoxIF.Text = IF;
+                    textBoxVW.Text = VW;
+                    textBoxFP.Text = FP;
+                    textBoxDepth.Text = Depth;
+                    textBoxWidth.Text = Width;
+                }
+            }
         }
     }
 }
