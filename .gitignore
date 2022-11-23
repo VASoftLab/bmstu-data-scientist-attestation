@@ -1,1 +1,4 @@
 model/welding-model/
+app/.vs/
+app/WeldingPredictor/bin/
+app/WeldingPredictor/obj/
