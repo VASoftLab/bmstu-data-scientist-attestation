@@ -66,6 +66,26 @@
             this.textBoxWidthPrediction = new System.Windows.Forms.TextBox();
             this.textBoxDepthPrediction = new System.Windows.Forms.TextBox();
             this.buttonPrediction = new System.Windows.Forms.Button();
+            this.buttonFullPrediction = new System.Windows.Forms.Button();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.labelMAE = new System.Windows.Forms.Label();
+            this.textBoxMAEDepth = new System.Windows.Forms.TextBox();
+            this.textBoxMSEDepth = new System.Windows.Forms.TextBox();
+            this.labelMSE = new System.Windows.Forms.Label();
+            this.textBoxRMSEDepth = new System.Windows.Forms.TextBox();
+            this.labelRMSE = new System.Windows.Forms.Label();
+            this.textBoxR2Depth = new System.Windows.Forms.TextBox();
+            this.labelR2 = new System.Windows.Forms.Label();
+            this.labelStatistic = new System.Windows.Forms.Label();
+            this.textBoxR2Width = new System.Windows.Forms.TextBox();
+            this.textBoxRMSEWidth = new System.Windows.Forms.TextBox();
+            this.textBoxMSEWidth = new System.Windows.Forms.TextBox();
+            this.textBoxMAEWidth = new System.Windows.Forms.TextBox();
+            this.textBoxMAPEWidth = new System.Windows.Forms.TextBox();
+            this.textBoxMAPEDepth = new System.Windows.Forms.TextBox();
+            this.labelMAPE = new System.Windows.Forms.Label();
+            this.labelDepthStat = new System.Windows.Forms.Label();
+            this.labelWidthStat = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).BeginInit();
             this.groupBoxIn.SuspendLayout();
@@ -88,10 +108,10 @@
             // buttonClose
             // 
             this.buttonClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonClose.Location = new System.Drawing.Point(759, 534);
+            this.buttonClose.Location = new System.Drawing.Point(568, 670);
             this.buttonClose.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.buttonClose.Name = "buttonClose";
-            this.buttonClose.Size = new System.Drawing.Size(112, 35);
+            this.buttonClose.Size = new System.Drawing.Size(302, 58);
             this.buttonClose.TabIndex = 0;
             this.buttonClose.Text = "ВЫХОД";
             this.buttonClose.UseVisualStyleBackColor = true;
@@ -157,8 +177,7 @@
             this.dataGridView.AllowUserToDeleteRows = false;
             this.dataGridView.AllowUserToResizeColumns = false;
             this.dataGridView.AllowUserToResizeRows = false;
-            this.dataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.dataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView.AutoGenerateColumns = false;
             this.dataGridView.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -483,21 +502,267 @@
             // 
             // buttonPrediction
             // 
-            this.buttonPrediction.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonPrediction.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonPrediction.Location = new System.Drawing.Point(568, 534);
             this.buttonPrediction.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.buttonPrediction.Name = "buttonPrediction";
-            this.buttonPrediction.Size = new System.Drawing.Size(186, 35);
+            this.buttonPrediction.Size = new System.Drawing.Size(303, 35);
             this.buttonPrediction.TabIndex = 11;
             this.buttonPrediction.Text = "ПРОГНОЗ";
             this.buttonPrediction.UseVisualStyleBackColor = true;
             this.buttonPrediction.Click += new System.EventHandler(this.buttonPrediction_Click);
             // 
+            // buttonFullPrediction
+            // 
+            this.buttonFullPrediction.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonFullPrediction.Enabled = false;
+            this.buttonFullPrediction.Location = new System.Drawing.Point(569, 579);
+            this.buttonFullPrediction.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.buttonFullPrediction.Name = "buttonFullPrediction";
+            this.buttonFullPrediction.Size = new System.Drawing.Size(303, 64);
+            this.buttonFullPrediction.TabIndex = 12;
+            this.buttonFullPrediction.Text = "ПРОГОН ВСЕЙ ВЫБОРКИ";
+            this.buttonFullPrediction.UseVisualStyleBackColor = true;
+            this.buttonFullPrediction.Click += new System.EventHandler(this.buttonFullPrediction_Click);
+            // 
+            // progressBar
+            // 
+            this.progressBar.Location = new System.Drawing.Point(14, 582);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(544, 29);
+            this.progressBar.TabIndex = 13;
+            // 
+            // labelMAE
+            // 
+            this.labelMAE.AutoSize = true;
+            this.labelMAE.Enabled = false;
+            this.labelMAE.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelMAE.Location = new System.Drawing.Point(174, 647);
+            this.labelMAE.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelMAE.Name = "labelMAE";
+            this.labelMAE.Size = new System.Drawing.Size(44, 20);
+            this.labelMAE.TabIndex = 14;
+            this.labelMAE.Text = "MAE";
+            // 
+            // textBoxMAEDepth
+            // 
+            this.textBoxMAEDepth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxMAEDepth.Enabled = false;
+            this.textBoxMAEDepth.ForeColor = System.Drawing.Color.Black;
+            this.textBoxMAEDepth.Location = new System.Drawing.Point(159, 670);
+            this.textBoxMAEDepth.Name = "textBoxMAEDepth";
+            this.textBoxMAEDepth.Size = new System.Drawing.Size(75, 26);
+            this.textBoxMAEDepth.TabIndex = 15;
+            this.textBoxMAEDepth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textBoxMSEDepth
+            // 
+            this.textBoxMSEDepth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxMSEDepth.Enabled = false;
+            this.textBoxMSEDepth.ForeColor = System.Drawing.Color.Black;
+            this.textBoxMSEDepth.Location = new System.Drawing.Point(240, 670);
+            this.textBoxMSEDepth.Name = "textBoxMSEDepth";
+            this.textBoxMSEDepth.Size = new System.Drawing.Size(75, 26);
+            this.textBoxMSEDepth.TabIndex = 17;
+            this.textBoxMSEDepth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // labelMSE
+            // 
+            this.labelMSE.AutoSize = true;
+            this.labelMSE.Enabled = false;
+            this.labelMSE.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelMSE.Location = new System.Drawing.Point(255, 647);
+            this.labelMSE.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelMSE.Name = "labelMSE";
+            this.labelMSE.Size = new System.Drawing.Size(44, 20);
+            this.labelMSE.TabIndex = 16;
+            this.labelMSE.Text = "MSE";
+            // 
+            // textBoxRMSEDepth
+            // 
+            this.textBoxRMSEDepth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxRMSEDepth.Enabled = false;
+            this.textBoxRMSEDepth.ForeColor = System.Drawing.Color.Black;
+            this.textBoxRMSEDepth.Location = new System.Drawing.Point(321, 670);
+            this.textBoxRMSEDepth.Name = "textBoxRMSEDepth";
+            this.textBoxRMSEDepth.Size = new System.Drawing.Size(75, 26);
+            this.textBoxRMSEDepth.TabIndex = 19;
+            this.textBoxRMSEDepth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // labelRMSE
+            // 
+            this.labelRMSE.AutoSize = true;
+            this.labelRMSE.Enabled = false;
+            this.labelRMSE.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelRMSE.Location = new System.Drawing.Point(330, 647);
+            this.labelRMSE.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelRMSE.Name = "labelRMSE";
+            this.labelRMSE.Size = new System.Drawing.Size(56, 20);
+            this.labelRMSE.TabIndex = 18;
+            this.labelRMSE.Text = "RMSE";
+            // 
+            // textBoxR2Depth
+            // 
+            this.textBoxR2Depth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxR2Depth.Enabled = false;
+            this.textBoxR2Depth.ForeColor = System.Drawing.Color.Black;
+            this.textBoxR2Depth.Location = new System.Drawing.Point(402, 670);
+            this.textBoxR2Depth.Name = "textBoxR2Depth";
+            this.textBoxR2Depth.Size = new System.Drawing.Size(75, 26);
+            this.textBoxR2Depth.TabIndex = 21;
+            this.textBoxR2Depth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // labelR2
+            // 
+            this.labelR2.AutoSize = true;
+            this.labelR2.Enabled = false;
+            this.labelR2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelR2.Location = new System.Drawing.Point(424, 647);
+            this.labelR2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelR2.Name = "labelR2";
+            this.labelR2.Size = new System.Drawing.Size(30, 20);
+            this.labelR2.TabIndex = 20;
+            this.labelR2.Text = "R2";
+            // 
+            // labelStatistic
+            // 
+            this.labelStatistic.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.labelStatistic.Enabled = false;
+            this.labelStatistic.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.labelStatistic.Location = new System.Drawing.Point(14, 617);
+            this.labelStatistic.Name = "labelStatistic";
+            this.labelStatistic.Size = new System.Drawing.Size(544, 26);
+            this.labelStatistic.TabIndex = 22;
+            this.labelStatistic.Text = "Статистика по всей выборке";
+            this.labelStatistic.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // textBoxR2Width
+            // 
+            this.textBoxR2Width.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxR2Width.Enabled = false;
+            this.textBoxR2Width.ForeColor = System.Drawing.Color.Black;
+            this.textBoxR2Width.Location = new System.Drawing.Point(402, 702);
+            this.textBoxR2Width.Name = "textBoxR2Width";
+            this.textBoxR2Width.Size = new System.Drawing.Size(75, 26);
+            this.textBoxR2Width.TabIndex = 26;
+            this.textBoxR2Width.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textBoxRMSEWidth
+            // 
+            this.textBoxRMSEWidth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxRMSEWidth.Enabled = false;
+            this.textBoxRMSEWidth.ForeColor = System.Drawing.Color.Black;
+            this.textBoxRMSEWidth.Location = new System.Drawing.Point(321, 702);
+            this.textBoxRMSEWidth.Name = "textBoxRMSEWidth";
+            this.textBoxRMSEWidth.Size = new System.Drawing.Size(75, 26);
+            this.textBoxRMSEWidth.TabIndex = 25;
+            this.textBoxRMSEWidth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textBoxMSEWidth
+            // 
+            this.textBoxMSEWidth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxMSEWidth.Enabled = false;
+            this.textBoxMSEWidth.ForeColor = System.Drawing.Color.Black;
+            this.textBoxMSEWidth.Location = new System.Drawing.Point(240, 702);
+            this.textBoxMSEWidth.Name = "textBoxMSEWidth";
+            this.textBoxMSEWidth.Size = new System.Drawing.Size(75, 26);
+            this.textBoxMSEWidth.TabIndex = 24;
+            this.textBoxMSEWidth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textBoxMAEWidth
+            // 
+            this.textBoxMAEWidth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxMAEWidth.Enabled = false;
+            this.textBoxMAEWidth.ForeColor = System.Drawing.Color.Black;
+            this.textBoxMAEWidth.Location = new System.Drawing.Point(159, 702);
+            this.textBoxMAEWidth.Name = "textBoxMAEWidth";
+            this.textBoxMAEWidth.Size = new System.Drawing.Size(75, 26);
+            this.textBoxMAEWidth.TabIndex = 23;
+            this.textBoxMAEWidth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textBoxMAPEWidth
+            // 
+            this.textBoxMAPEWidth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxMAPEWidth.Enabled = false;
+            this.textBoxMAPEWidth.ForeColor = System.Drawing.Color.Black;
+            this.textBoxMAPEWidth.Location = new System.Drawing.Point(483, 702);
+            this.textBoxMAPEWidth.Name = "textBoxMAPEWidth";
+            this.textBoxMAPEWidth.Size = new System.Drawing.Size(75, 26);
+            this.textBoxMAPEWidth.TabIndex = 29;
+            this.textBoxMAPEWidth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textBoxMAPEDepth
+            // 
+            this.textBoxMAPEDepth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxMAPEDepth.Enabled = false;
+            this.textBoxMAPEDepth.ForeColor = System.Drawing.Color.Black;
+            this.textBoxMAPEDepth.Location = new System.Drawing.Point(483, 670);
+            this.textBoxMAPEDepth.Name = "textBoxMAPEDepth";
+            this.textBoxMAPEDepth.Size = new System.Drawing.Size(75, 26);
+            this.textBoxMAPEDepth.TabIndex = 28;
+            this.textBoxMAPEDepth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // labelMAPE
+            // 
+            this.labelMAPE.AutoSize = true;
+            this.labelMAPE.Enabled = false;
+            this.labelMAPE.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelMAPE.Location = new System.Drawing.Point(493, 647);
+            this.labelMAPE.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelMAPE.Name = "labelMAPE";
+            this.labelMAPE.Size = new System.Drawing.Size(54, 20);
+            this.labelMAPE.TabIndex = 27;
+            this.labelMAPE.Text = "MAPE";
+            // 
+            // labelDepthStat
+            // 
+            this.labelDepthStat.AutoSize = true;
+            this.labelDepthStat.Enabled = false;
+            this.labelDepthStat.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelDepthStat.Location = new System.Drawing.Point(17, 673);
+            this.labelDepthStat.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelDepthStat.Name = "labelDepthStat";
+            this.labelDepthStat.Size = new System.Drawing.Size(71, 20);
+            this.labelDepthStat.TabIndex = 30;
+            this.labelDepthStat.Text = "Глубина";
+            // 
+            // labelWidthStat
+            // 
+            this.labelWidthStat.AutoSize = true;
+            this.labelWidthStat.Enabled = false;
+            this.labelWidthStat.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelWidthStat.Location = new System.Drawing.Point(17, 705);
+            this.labelWidthStat.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelWidthStat.Name = "labelWidthStat";
+            this.labelWidthStat.Size = new System.Drawing.Size(67, 20);
+            this.labelWidthStat.TabIndex = 31;
+            this.labelWidthStat.Text = "Ширина";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(884, 583);
+            this.ClientSize = new System.Drawing.Size(884, 746);
+            this.Controls.Add(this.labelWidthStat);
+            this.Controls.Add(this.labelDepthStat);
+            this.Controls.Add(this.textBoxMAPEWidth);
+            this.Controls.Add(this.textBoxMAPEDepth);
+            this.Controls.Add(this.labelMAPE);
+            this.Controls.Add(this.textBoxR2Width);
+            this.Controls.Add(this.textBoxRMSEWidth);
+            this.Controls.Add(this.textBoxMSEWidth);
+            this.Controls.Add(this.textBoxMAEWidth);
+            this.Controls.Add(this.labelStatistic);
+            this.Controls.Add(this.textBoxR2Depth);
+            this.Controls.Add(this.labelR2);
+            this.Controls.Add(this.textBoxRMSEDepth);
+            this.Controls.Add(this.labelRMSE);
+            this.Controls.Add(this.textBoxMSEDepth);
+            this.Controls.Add(this.labelMSE);
+            this.Controls.Add(this.textBoxMAEDepth);
+            this.Controls.Add(this.labelMAE);
+            this.Controls.Add(this.progressBar);
+            this.Controls.Add(this.buttonFullPrediction);
             this.Controls.Add(this.buttonPrediction);
             this.Controls.Add(this.groupBoxPrediction);
             this.Controls.Add(this.groupBoxOut);
@@ -569,6 +834,26 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn widthDataGridViewTextBoxColumn;
         private System.Windows.Forms.Label labelDeltaWidth;
         private System.Windows.Forms.Label labelDeltaDepth;
+        private System.Windows.Forms.Button buttonFullPrediction;
+        private System.Windows.Forms.ProgressBar progressBar;
+        private System.Windows.Forms.Label labelMAE;
+        private System.Windows.Forms.TextBox textBoxMAEDepth;
+        private System.Windows.Forms.TextBox textBoxMSEDepth;
+        private System.Windows.Forms.Label labelMSE;
+        private System.Windows.Forms.TextBox textBoxRMSEDepth;
+        private System.Windows.Forms.Label labelRMSE;
+        private System.Windows.Forms.TextBox textBoxR2Depth;
+        private System.Windows.Forms.Label labelR2;
+        private System.Windows.Forms.Label labelStatistic;
+        private System.Windows.Forms.TextBox textBoxR2Width;
+        private System.Windows.Forms.TextBox textBoxRMSEWidth;
+        private System.Windows.Forms.TextBox textBoxMSEWidth;
+        private System.Windows.Forms.TextBox textBoxMAEWidth;
+        private System.Windows.Forms.TextBox textBoxMAPEWidth;
+        private System.Windows.Forms.TextBox textBoxMAPEDepth;
+        private System.Windows.Forms.Label labelMAPE;
+        private System.Windows.Forms.Label labelDepthStat;
+        private System.Windows.Forms.Label labelWidthStat;
     }
 }
 
