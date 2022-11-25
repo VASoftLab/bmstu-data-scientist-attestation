@@ -508,7 +508,7 @@
             this.buttonPrediction.Name = "buttonPrediction";
             this.buttonPrediction.Size = new System.Drawing.Size(303, 35);
             this.buttonPrediction.TabIndex = 11;
-            this.buttonPrediction.Text = "ПРОГНОЗ";
+            this.buttonPrediction.Text = "ВЫБОРОЧНЫЙ ПРОГНОЗ";
             this.buttonPrediction.UseVisualStyleBackColor = true;
             this.buttonPrediction.Click += new System.EventHandler(this.buttonPrediction_Click);
             // 
@@ -530,6 +530,7 @@
             this.progressBar.Location = new System.Drawing.Point(14, 582);
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(544, 29);
+            this.progressBar.Step = 1;
             this.progressBar.TabIndex = 13;
             // 
             // labelMAE
@@ -835,7 +836,6 @@
         private System.Windows.Forms.Label labelDeltaWidth;
         private System.Windows.Forms.Label labelDeltaDepth;
         private System.Windows.Forms.Button buttonFullPrediction;
-        private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.Label labelMAE;
         private System.Windows.Forms.TextBox textBoxMAEDepth;
         private System.Windows.Forms.TextBox textBoxMSEDepth;
@@ -854,6 +854,7 @@
         private System.Windows.Forms.Label labelMAPE;
         private System.Windows.Forms.Label labelDepthStat;
         private System.Windows.Forms.Label labelWidthStat;
+        public System.Windows.Forms.ProgressBar progressBar;
     }
 }
 

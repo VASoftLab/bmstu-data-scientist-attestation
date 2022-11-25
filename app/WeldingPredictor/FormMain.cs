@@ -371,6 +371,7 @@ namespace WeldingPredictor
 
             progressBar.Minimum = 0;
             progressBar.Maximum = N - 1;
+            progressBar.Step = 1;
 
             Cursor.Current = Cursors.WaitCursor;
 
@@ -379,9 +380,15 @@ namespace WeldingPredictor
 
             // Созднаие сессии для работы с моделью
             var session = new InferenceSession(appSet.PathToModel);
+            progressBar.PerformStep();
+            progressBar.PerformStep();
+            progressBar.PerformStep();
+            progressBar.PerformStep();
+            progressBar.PerformStep();
 
             for (int index = 0; index < N; index++)
             {
+                
                 dataGridView.Rows[index].Selected = true;
                 dataGridView.FirstDisplayedScrollingRowIndex = index;
 
@@ -403,9 +410,9 @@ namespace WeldingPredictor
 
                 statWidth.Y.Add(Width);
                 statWidth.A.Add(prediction.Item2);
-
-                progressBar.Value = index;
+                progressBar.PerformStep();
             }
+
             progressBar.Value = 0;
 
             statDepth.Calculate();
